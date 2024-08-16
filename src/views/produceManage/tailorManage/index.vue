@@ -4,8 +4,8 @@
       <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
                 @keyup.enter.native="handleFilter" /> -->
       <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-        <el-form-item label="裁剪类型">
-          <el-input v-model="listQuery.filter" placeholder="请输入裁剪类型" />
+        <el-form-item label="房主姓名">
+          <el-input v-model="listQuery.filter" placeholder="请输入房主姓名" />
         </el-form-item>
         <el-form-item>
           <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
@@ -44,32 +44,37 @@
         highlight-current-row
         style="width: 100%"
       >
-        <el-table-column label="类型" prop="code" align="center">
+        <el-table-column label="编号" prop="code" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="尺寸" prop="type3" align="center">
+        <el-table-column label="房主姓名" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="厚度" prop="type3" align="center">
+        <el-table-column label="行政区域" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="硬度" prop="type3" align="center">
+        <el-table-column label="排查时间" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="裁剪速度" prop="type3" align="center">
+        <el-table-column label="鉴定情况" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="刀具路径" prop="type3" align="center">
+        <el-table-column label="建造年代" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="房屋结构" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>

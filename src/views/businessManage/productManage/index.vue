@@ -4,8 +4,8 @@
       <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
                 @keyup.enter.native="handleFilter" /> -->
       <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-        <el-form-item label="商品关键字">
-          <el-input v-model="listQuery.filter" placeholder="请输入商品关键字" />
+        <el-form-item label="定时任务">
+          <el-input v-model="listQuery.filter" placeholder="请输入定时任务" />
         </el-form-item>
         <el-form-item>
           <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
@@ -44,22 +44,22 @@
         highlight-current-row
         style="width: 100%"
       >
-        <el-table-column label="关键字" prop="code" align="center">
+        <el-table-column label="任务ID" prop="code" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="商品名称" prop="type3" align="center">
+        <el-table-column label="任务名称" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="条形码" prop="type3" align="center">
+        <el-table-column label="开始时间" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="库存位置" prop="type3" align="center">
+        <el-table-column label="结束时间" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>

@@ -4,22 +4,22 @@
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="auto" :rules="rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="关键字" prop="customerCode">
+            <el-form-item label="任务ID" prop="customerCode">
               <el-input v-model="temp.customerCode" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="商品名称" prop="customerName">
+            <el-form-item label="任务名称" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="条形码" prop="customerName">
+            <el-form-item label="开始时间" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="库存位置" prop="customerName">
+            <el-form-item label="结束时间" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>

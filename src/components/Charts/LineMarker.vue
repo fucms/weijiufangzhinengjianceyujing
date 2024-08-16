@@ -19,16 +19,21 @@ export default {
     },
     width: {
       type: String,
-      default: '200px'
+      default: '80%'
     },
     height: {
       type: String,
-      default: '200px'
+      default: '85%'
     }
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      data: {
+        crackWidths: [1.2, 1.3, 1.5, 1.7, 1.8, 1.9, 2.0, 2.1, 2.3, 2.4, 2.5, 2.6], // 裂缝宽度数据
+        tiltAngles: [0.5, 0.6, 0.7, 0.7, 0.8, 0.9, 1.0, 1.1, 1.1, 1.2, 1.3, 1.4], // 房屋倾斜度数据
+        settlements: [0.8, 0.9, 1.1, 1.3, 1.4, 1.6, 1.7, 1.8, 2.0, 2.1, 2.3, 2.5] // 沉降量数据
+      }
     }
   },
   mounted() {
@@ -49,7 +54,7 @@ export default {
         backgroundColor: '#394056',
         title: {
           top: 20,
-          text: 'Requests',
+          text: '房屋监测数据',
           textStyle: {
             fontWeight: 'normal',
             fontSize: 16,
@@ -71,7 +76,7 @@ export default {
           itemWidth: 14,
           itemHeight: 5,
           itemGap: 13,
-          data: ['CMCC', 'CTCC', 'CUCC'],
+          data: ['裂缝宽度 (mm)', '房屋倾斜度 (°)', '沉降量 (cm)'],
           right: '4%',
           textStyle: {
             fontSize: 12,
@@ -93,11 +98,10 @@ export default {
               color: '#57617B'
             }
           },
-          data: ['13:00', '13:05', '13:10', '13:15', '13:20', '13:25', '13:30', '13:35', '13:40', '13:45', '13:50', '13:55']
+          data: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12']
         }],
         yAxis: [{
           type: 'value',
-          name: '(%)',
           axisTick: {
             show: false
           },
@@ -107,10 +111,7 @@ export default {
             }
           },
           axisLabel: {
-            margin: 10,
-            textStyle: {
-              fontSize: 14
-            }
+            formatter: '{value}'
           },
           splitLine: {
             lineStyle: {
@@ -119,7 +120,7 @@ export default {
           }
         }],
         series: [{
-          name: 'CMCC',
+          name: '裂缝宽度 (mm)',
           type: 'line',
           smooth: true,
           symbol: 'circle',
@@ -151,9 +152,9 @@ export default {
 
             }
           },
-          data: [220, 182, 191, 134, 150, 120, 110, 125, 145, 122, 165, 122]
+          data: this.data.crackWidths
         }, {
-          name: 'CTCC',
+          name: '房屋倾斜度 (°)',
           type: 'line',
           smooth: true,
           symbol: 'circle',
@@ -185,9 +186,9 @@ export default {
 
             }
           },
-          data: [120, 110, 125, 145, 122, 165, 122, 220, 182, 191, 134, 150]
+          data: this.data.tiltAngles
         }, {
-          name: 'CUCC',
+          name: '沉降量 (cm)',
           type: 'line',
           smooth: true,
           symbol: 'circle',
@@ -218,7 +219,7 @@ export default {
               borderWidth: 12
             }
           },
-          data: [220, 182, 125, 145, 122, 191, 134, 150, 120, 110, 165, 122]
+          data: this.data.settlements
         }]
       })
     }

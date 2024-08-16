@@ -4,35 +4,41 @@
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="auto" :rules="rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="类型" prop="customerCode">
+            <el-form-item label="编号" prop="customerCode">
               <el-input v-model="temp.customerCode" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="尺寸" prop="customerName">
+            <el-form-item label="房主姓名" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="厚度" prop="customerName">
+            <el-form-item label="行政区域" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="硬度" prop="customerName">
+            <el-form-item label="排查时间" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="裁剪速度" prop="customerName">
+            <el-form-item label="鉴定情况" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="刀具路径" prop="customerName">
+            <el-form-item label="建造年代" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="房屋结构" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -49,7 +55,7 @@ export default {
   },
   data() {
     return {
-      title: '新增裁剪',
+      title: '新增',
       visible: false,
       temp: {
         customerCode: '',

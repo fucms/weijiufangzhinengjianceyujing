@@ -5,7 +5,7 @@ const produceRouter = {
   component: Layout,
   redirect: '/basicInfo/index.vue',
   meta: {
-    title: '生产管理',
+    title: '隐患排查模块',
     icon: 'nested'
   },
   children: [
@@ -13,38 +13,21 @@ const produceRouter = {
       path: '/basicInfo',
       component: () => import('@/views/produceManage/basicInfo/index.vue'),
       name: 'basicInfo',
-      meta: { title: '基础信息' }
+      meta: { title: '隐患排查数据录入' }
     },
     {
       path: '/tailorManage',
       component: () => import('@/views/produceManage/tailorManage/index.vue'),
       name: 'tailorManage',
-      meta: { title: '裁剪管理' }
+      meta: { title: '隐患房屋数据统计' }
     },
     {
       path: '/qualityManage',
       component: () => import('@/views/produceManage/qualityManage/index.vue'),
       name: 'qualityManage',
-      meta: { title: '质检应用' }
-    },
-    {
-      path: '/deviceManage',
-      component: () => import('@/views/produceManage/deviceManage/index.vue'),
-      name: 'deviceManage',
-      meta: { title: '设备管理' }
-    },
-    {
-      path: '/outOrderManage',
-      component: () => import('@/views/produceManage/outOrderManage/index.vue'),
-      name: 'outOrderManage',
-      meta: { title: '外协订单管理' }
-    },
-    {
-      path: '/outFactoryManage',
-      component: () => import('@/views/produceManage/outFactoryManage/index.vue'),
-      name: 'outFactoryManage',
-      meta: { title: '外协工厂管理' }
+      meta: { title: '隐患排查相关资料' }
     }
+
   ]
 }
 

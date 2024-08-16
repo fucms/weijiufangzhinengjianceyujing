@@ -3,122 +3,80 @@
     <div class="filter-container">
       <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
                 @keyup.enter.native="handleFilter" /> -->
-      <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-        <el-form-item label="疵点信息">
-          <el-input v-model="listQuery.filter" placeholder="请输入疵点信息" />
+      <el-form :model="listQuery" class="demo-form-inline">
+        <el-form-item label="排查文件">
+          <el-upload
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+            :file-list="fileList"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+          </el-upload>
         </el-form-item>
-        <el-form-item>
-          <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-            搜索
-          </el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-plus"
-            @click="handleCreate"
-          >新增</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-bottom"
-            @click="handleImport"
-          >导入</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-top"
-            @click="handleDownload"
-          >导出</el-button>
+        <el-form-item label="技术指南">
+          <el-upload
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+            :file-list="fileList"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="区县年度排查整治方案">
+          <el-upload
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+            :file-list="fileList"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="区县年度排查整治工作人员培训资料">
+          <el-upload
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+            :file-list="fileList"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传word文件，且不超过500kb</div>
+          </el-upload>
         </el-form-item>
       </el-form>
-
-      <el-table
-        :key="tableKey"
-        v-loading="listLoading"
-        :data="list"
-        border
-        fit
-        highlight-current-row
-        style="width: 100%"
-      >
-        <el-table-column label="疵点信息" prop="code" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="工序信息" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="数量信息" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="疵点图片" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="检验数量" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="返修数量" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column label="操作" align="center" min-width="120">
-          <template slot-scope="{ row }">
-            <el-button type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
-            <el-button size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-
-      <!-- 分页 -->
-      <pagination
-        v-show="total > 0"
-        :total="total"
-        :page.sync="listQuery.page"
-        :limit.sync="listQuery.limit"
-        @pagination="getList"
-      />
-      <!-- 导入 -->
-      <UploadDownExcel
-        ref="UploadDownExcel"
-        :href="href"
-        :down-load-text="downLoadText"
-        @uploadTableList="uploadTableList"
-      />
-      <!-- 新增 -->
-      <Create ref="create" />
-      <!-- 编辑 -->
-      <Edit ref="edit" />
     </div>
   </div>
 </template>
 
 <script>
 import { getList } from '@/api/aboutDocument'
-import Pagination from '@/components/Pagination'
-import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
-import Create from './components/create.vue'
-import Edit from './components/edit.vue'
+
 import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
 export default {
   components: {
-    Pagination,
-    UploadDownExcel,
-    Create,
-    Edit
+
   },
   data() {
     return {

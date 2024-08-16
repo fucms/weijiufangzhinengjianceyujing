@@ -1,208 +1,183 @@
 <template>
-  <div ref="workbench" class="crm-workbench">
-    <div>
-      <el-row class="elRowBox">
-        <el-col :xs="24" :sm="24" :lg="24">
-          <div class="chart-wrapper">
-            <line-chart :chart-data="lineChartData" />
-          </div>
-        </el-col>
-      </el-row>
+  <div class="app-container">
+    <div class="filter-container">
+      <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
+                @keyup.enter.native="handleFilter" /> -->
+      <el-form :inline="true" :model="listQuery" class="demo-form-inline">
+        <el-form-item label="整改单编号">
+          <el-input v-model="listQuery.filter" placeholder="请输入整改单编号" />
+        </el-form-item>
+        <el-form-item label="审核人">
+          <el-input v-model="listQuery.filter" placeholder="请输入审核人" />
+        </el-form-item>
+        <el-form-item>
+          <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+            搜索
+          </el-button>
+          <el-button
+            class="filter-item"
+            style="margin-left: 10px"
+            type="primary"
+            icon="el-icon-plus"
+            @click="handleCreate"
+          >新增</el-button>
+          <el-button
+            class="filter-item"
+            style="margin-left: 10px"
+            type="primary"
+            icon="el-icon-bottom"
+            @click="handleImport"
+          >导入</el-button>
+          <el-button
+            class="filter-item"
+            style="margin-left: 10px"
+            type="primary"
+            icon="el-icon-top"
+            @click="handleDownload"
+          >导出</el-button>
+        </el-form-item>
+      </el-form>
+
+      <el-table
+        :key="tableKey"
+        v-loading="listLoading"
+        :data="list"
+        border
+        fit
+        highlight-current-row
+        style="width: 100%"
+      >
+        <el-table-column label="整改单编号" prop="code" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="隐患描述" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="整改措施" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="整改完成时间" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="整改负责人" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="审核人" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="审核状态" prop="type3" align="center">
+          <el-tag type="info">审核中</el-tag>
+        </el-table-column>
+
+        <el-table-column label="操作" align="center" min-width="120">
+          <template slot-scope="{ row }">
+            <el-button type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
+            <el-button size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <!-- 分页 -->
+      <pagination
+        v-show="total > 0"
+        :total="total"
+        :page.sync="listQuery.page"
+        :limit.sync="listQuery.limit"
+        @pagination="getList"
+      />
+      <!-- 导入 -->
+      <UploadDownExcel
+        ref="UploadDownExcel"
+        :href="href"
+        :down-load-text="downLoadText"
+        @uploadTableList="uploadTableList"
+      />
+      <!-- 新增 -->
+      <Create ref="create" />
+      <!-- 编辑 -->
+      <Edit ref="edit" />
     </div>
   </div>
 </template>
 
 <script>
-import LineChart from './components/LineChart'
-// import RaddarChart from './components/RaddarChart'
-// import PieChart from './components/PieChart'
-// import BarChart from './components/BarChart'
-const lineChartData = {
-  newVisitis: {
-    Data1: [100, 120, 161, 134, 105, 160, 165],
-    Data2: [120, 82, 91, 154, 162, 140, 145],
-    Data3: [80, 90, 110, 120, 170, 130, 100]
-  },
-  messages: {
-    expectedData: [200, 192, 120, 144, 160, 130, 140],
-    actualData: [180, 160, 151, 106, 145, 150, 130]
-  },
-  purchases: {
-    expectedData: [80, 100, 121, 104, 105, 90, 100],
-    actualData: [120, 90, 100, 138, 142, 130, 130]
-  },
-  shoppings: {
-    expectedData: [130, 140, 141, 142, 145, 150, 160],
-    actualData: [120, 82, 91, 154, 162, 140, 130]
-  }
-}
+import { getList } from '@/api/aboutDocument'
+import Pagination from '@/components/Pagination'
+import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
+import Create from './components/create.vue'
+import Edit from './components/edit.vue'
+import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
 export default {
-  name: 'Workbench',
   components: {
-    LineChart
-    // RaddarChart,
-    // PieChart
-    // BarChart
+    Pagination,
+    UploadDownExcel,
+    Create,
+    Edit
   },
   data() {
     return {
-      loading: false,
-      activeName: 'collectedAmount',
-      lineChartData: lineChartData.newVisitis
+      tableKey: 0,
+      list: [],
+      listLoading: true,
+      listQuery: {
+        page: 1,
+        limit: 10,
+        filter: ''
+      },
+      total: 0,
+      href: '/template/默认文件.xlsx',
+      downLoadText: '默认文件.xlsx'
     }
   },
-  computed: {
+  computed: {},
+  mounted() {
+    this.getList()
   },
   methods: {
-    handleSetLineChartData(type) {
-      this.lineChartData = lineChartData[type]
-    }
+    getList() {
+      this.listLoading = true
+      getList().then(res => {
+        this.list = res.items.map((item, index) => {
+          item.levelTypeColor = levelTypeColor(item.level)
+          item.customerStatusColor = customerStatusColor(item.status)
+          return {
+            ...item,
+            index: index + 1
+          }
+        })
+        this.total = res.total
+        this.listLoading = false
+      })
+    },
+    handleFilter() { },
+    // 导入组件弹出
+    handleImport() {
+      this.$refs.UploadDownExcel.show()
+    },
+    // 导入文件
+    uploadTableList(val) { },
+    handleCreate() {
+      this.$refs.create.show()
+    },
+    handleUpdate(val) {
+      this.$refs.edit.show(val)
+    },
+    handleDelete() { },
+    handleDownload() { }
   }
 }
 </script>
 
-<style scoped lang="scss">
-.crm-workbench {
-  position: relative;
-  width: 100%;
-  min-width: 1200px;
-  height: 100%;
-  padding: 15px 20px 20px;
-  background-color: rgb(240, 242, 245);
-
-  &__body {
-    height: 100%;
-    overflow: auto;
-    padding-top: 55px;
-  }
-
-  .brief-box {
-    width: 100%;
-    background-color: white;
-    border: 1px solid #e6e6e6;
-    border-radius: 6px;
-    .brief-title {
-      padding: 15px 20px 0;
-      .icon {
-        color: #50cf9e;
-        font-size: 18px;
-      }
-      .text {
-        font-size: 16px;
-        font-weight: bold;
-        margin-left: 5px;
-      }
-    }
-    .brief {
-      width: 100%;
-      padding: 10px 10px 14px 10px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      .brief-item {
-        cursor: pointer;
-        width: calc(25% - 20px);
-        height: 88px;
-        box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.08);
-        border-radius: 6px;
-        margin: 10px;
-        .brief-item__body {
-          flex: 1;
-          overflow: hidden;
-          .icon-box {
-            width: 36px;
-            height: 36px;
-            line-height: 36px;
-            text-align: center;
-            border-radius: 50%;
-            margin-right: 10px;
-            margin-left: 15px;
-            flex-shrink: 0;
-
-            .icon {
-              color: white;
-              font-size: 19px;
-            }
-          }
-          .info {
-            overflow: hidden;
-            .title {
-              font-size: 13px;
-            }
-            .number {
-              font-size: 23px;
-              font-weight: bold;
-              line-height: 1;
-              margin-top: 8px;
-              margin-right: 5px;
-              overflow: hidden;
-            }
-          }
-        }
-        .brief-item__others {
-          position: relative;
-          width: 100px;
-          text-align: center;
-          padding: 0 3px;
-          overflow: hidden;
-
-          &:before {
-            position: absolute;
-            top: 7.5%;
-            left: 0;
-            content: "";
-            width: 1px;
-            height: 85%;
-            background-color: #e6e6e6;
-            display: block;
-          }
-          .text {
-            font-size: 12px;
-            margin-left: -5px;
-          }
-          .rate {
-            font-size: 14px;
-            color: #2bbf24;
-            margin-top: 8px;
-
-            .rate__icon {
-              font-size: 12px;
-            }
-            &.bottom {
-              color: #2bbf24;
-            }
-            &.top {
-              color: #f24b4b;
-            }
-          }
-        }
-        &:hover {
-          box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.2);
-        }
-      }
-    }
-  }
-  .elRowBox {
-    margin: 10px 0;
-  }
-  .chart-wrapper {
-    background: #fff;
-    padding: 16px 16px 0;
-  }
-  .chartBox {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-  }
-  .chartBox > p:nth-child(2) {
-    margin: 0 50px;
-  }
-  .chartBox > p {
-    font-size: 16px;
-  }
-}
-</style>
+<style lang="less" scoped></style>

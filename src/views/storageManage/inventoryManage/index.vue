@@ -4,9 +4,20 @@
       <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
                 @keyup.enter.native="handleFilter" /> -->
       <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-        <el-form-item label="出入库记录">
-          <el-input v-model="listQuery.filter" placeholder="请输入出入库记录" />
-        </el-form-item>
+        <el-form :inline="true" :model="listQuery" class="demo-form-inline">
+          <el-form-item label="房屋编号">
+            <el-input v-model="listQuery.filter" placeholder="请输入房屋编号" />
+          </el-form-item>
+          <el-form-item label="房屋名称">
+            <el-input v-model="listQuery.filter" placeholder="请输入房屋名称" />
+          </el-form-item>
+          <el-form-item label="房屋地址">
+            <el-input v-model="listQuery.filter" placeholder="请输入房屋地址" />
+          </el-form-item>
+          <el-form-item label="房屋类型">
+            <el-input v-model="listQuery.filter" placeholder="请输入房屋类型" />
+          </el-form-item>
+        </el-form>
         <el-form-item>
           <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
             搜索
@@ -44,17 +55,47 @@
         highlight-current-row
         style="width: 100%"
       >
-        <el-table-column label="出入库记录" prop="code" align="center">
+        <el-table-column label="房屋编号" prop="code" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="库龄分析" prop="type3" align="center">
+        <el-table-column label="房屋名称" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="台账核对" prop="type3" align="center">
+        <el-table-column label="房屋地址" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="建筑面积" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="建造年份" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="房屋类型" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="房屋状态" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="隐患等级" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="整改状态" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>

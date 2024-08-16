@@ -5,7 +5,7 @@ const storageRouter = {
   component: Layout,
   redirect: '/storageManage/index.vue',
   meta: {
-    title: '仓储管理',
+    title: '隐患治理模块',
     icon: 'nested'
   },
   children: [
@@ -13,19 +13,19 @@ const storageRouter = {
       path: '/locationManage',
       component: () => import('@/views/storageManage/locationManage/index.vue'),
       name: 'locationManage',
-      meta: { title: '库位管理' }
+      meta: { title: '隐患整改申报' }
     },
     {
       path: '/itemCount',
       component: () => import('@/views/storageManage/itemCount/index.vue'),
       name: 'itemCount',
-      meta: { title: '物料盘点' }
+      meta: { title: '隐患整改审核' }
     },
     {
       path: '/inventoryManage',
       component: () => import('@/views/storageManage/inventoryManage/index.vue'),
       name: 'inventoryManage',
-      meta: { title: '库存台账' }
+      meta: { title: '数据汇总查询' }
     }
   ]
 }

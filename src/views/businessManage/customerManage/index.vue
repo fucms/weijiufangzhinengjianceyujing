@@ -3,37 +3,6 @@
     <div class="filter-container">
       <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
                 @keyup.enter.native="handleFilter" /> -->
-      <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-        <el-form-item label="客户姓名">
-          <el-input v-model="listQuery.filter" placeholder="请输入客户姓名" />
-        </el-form-item>
-        <el-form-item>
-          <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-            搜索
-          </el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-plus"
-            @click="handleCreate"
-          >新增</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-bottom"
-            @click="handleImport"
-          >导入</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-top"
-            @click="handleDownload"
-          >导出</el-button>
-        </el-form-item>
-      </el-form>
 
       <el-table
         :key="tableKey"
@@ -44,29 +13,35 @@
         highlight-current-row
         style="width: 100%"
       >
-        <el-table-column label="姓名" prop="code" align="center">
+        <el-table-column label="排序" prop="code" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="地址" prop="type3" align="center">
+        <el-table-column label="菜单名称" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="电子邮件" prop="type3" align="center">
+        <el-table-column label="请求地址" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="电话号码" prop="type3" align="center">
+        <el-table-column label="类型" prop="type3" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="是否显示" prop="source" align="center">
+          <template slot-scope="{ row }">
+            <el-tag :style="row.sourceTypeColor">显示</el-tag>
           </template>
         </el-table-column>
 
         <el-table-column label="操作" align="center" min-width="120">
           <template slot-scope="{ row }">
+            <el-button type="success" size="mini" @click="handleCreate">新增</el-button>
             <el-button type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
           </template>

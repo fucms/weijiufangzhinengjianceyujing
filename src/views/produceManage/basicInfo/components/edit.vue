@@ -4,32 +4,42 @@
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="auto" :rules="rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="姓名" prop="customerCode">
+            <el-form-item label="编号" prop="customerCode">
               <el-input v-model="temp.customerCode" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="性别" prop="customerName">
+            <el-form-item label="房主姓名" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="年龄" prop="customerName">
+            <el-form-item label="行政区域" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="联系方式" prop="customerName">
+            <el-form-item label="排查时间" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="操作技能" prop="customerName">
+            <el-form-item label="排查进度" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="安全证书" prop="customerName">
+            <el-form-item label="建造年代" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="房屋结构" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="鉴定情况" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
@@ -51,7 +61,7 @@ export default {
   },
   data() {
     return {
-      title: '编辑信息',
+      title: '编辑',
       visible: false,
       temp: {
         customerCode: '',

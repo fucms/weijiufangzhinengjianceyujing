@@ -4,17 +4,47 @@
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="auto" :rules="rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="出入库记录" prop="customerCode">
+            <el-form-item label="房屋编号" prop="customerCode">
               <el-input v-model="temp.customerCode" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="库龄分析" prop="customerName">
+            <el-form-item label="房屋名称" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="台账核对" prop="customerName">
+            <el-form-item label="房屋地址" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="建筑面积" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="建造年份" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="房屋类型" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="房屋状态" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="隐患等级" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="整改状态" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
@@ -36,7 +66,7 @@ export default {
   },
   data() {
     return {
-      title: '编辑台账',
+      title: '编辑',
       visible: false,
       temp: {
         customerCode: '',

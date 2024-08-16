@@ -4,27 +4,32 @@
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="auto" :rules="rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="名称" prop="customerCode">
+            <el-form-item label="用户ID" prop="customerCode">
               <el-input v-model="temp.customerCode" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="地址" prop="customerName">
+            <el-form-item label="用户名称" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="电子邮件" prop="customerName">
+            <el-form-item label="登录账户" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="角色类型" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="区域名称" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="电话号码" prop="customerName">
-              <el-input v-model="temp.customerName" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="供应商银行账户信息" prop="customerName">
               <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
@@ -44,7 +49,7 @@ export default {
   },
   data() {
     return {
-      title: '新增供应商',
+      title: '新增',
       visible: false,
       temp: {
         customerCode: '',
