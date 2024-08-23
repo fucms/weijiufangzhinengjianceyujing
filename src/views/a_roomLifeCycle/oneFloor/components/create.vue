@@ -5,42 +5,42 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="楼号" prop="customerCode">
-              <el-input v-model="temp.customerCode" />
+              <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="所属小区" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="所属社区" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="社区编码" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode4" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="楼房等级" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode5" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="房屋地址" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode6" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="建筑面积" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode7" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="建造年代" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode8" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -62,13 +62,14 @@ export default {
       title: '新增',
       visible: false,
       temp: {
-        customerCode: '',
-        customerName: '',
-        dutyParagraph: '',
-        type1: '',
-        type2: '',
-        type3: '',
-        product: ''
+        customerCode1: '',
+        customerCode2: '',
+        customerCode3: '',
+        customerCode4: '',
+        customerCode5: '',
+        customerCode6: '',
+        customerCode7: '',
+        customerCode8: ''
       },
       rules: {}
     }
@@ -81,7 +82,8 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           this.visible = false
-          this.$parent.getList()
+          this.$emit('submit', this.temp)
+          this.temp = {}
           this.$message({
             type: 'success',
             message: '操作成功'

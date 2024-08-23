@@ -46,37 +46,37 @@
       >
         <el-table-column label="设备编号" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code1 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="安装小区" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code2 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="安装地点" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code3 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="设备类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code4 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="设备名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code5 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="设备阈值" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code6 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="设备品牌" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code7 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" min-width="120">
@@ -103,7 +103,7 @@
         @uploadTableList="uploadTableList"
       />
       <!-- 新增 -->
-      <Create ref="create" />
+      <Create ref="create" @submit="create" />
       <!-- 编辑 -->
       <Edit ref="edit" />
     </div>
@@ -157,6 +157,17 @@ export default {
         })
         this.total = res.total
         this.listLoading = false
+      })
+    },
+    create(form) {
+      this.list.push({
+        code1: form.customerCode1,
+        code2: form.customerCode2,
+        code3: form.customerCode3,
+        code4: form.customerCode4,
+        code5: form.customerCode5,
+        code6: form.customerCode6,
+        code7: form.customerCode7
       })
     },
     handleFilter() { },

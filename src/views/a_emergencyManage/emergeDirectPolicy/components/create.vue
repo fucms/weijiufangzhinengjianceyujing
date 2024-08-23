@@ -5,27 +5,30 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="序号" prop="customerCode">
-              <el-input v-model="temp.customerCode" />
+              <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="事件名称" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="事件类型" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="参与部门" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode4" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="执行状态" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-select v-model="temp.value" placeholder="请选择">
+                <el-option label="执行中" value="0" />
+                <el-option label="已执行" value="1" />
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -47,13 +50,11 @@ export default {
       title: '新增',
       visible: false,
       temp: {
-        customerCode: '',
-        customerName: '',
-        dutyParagraph: '',
-        type1: '',
-        type2: '',
-        type3: '',
-        product: ''
+        customerCode1: '',
+        customerCode2: '',
+        customerCode3: '',
+        customerCode4: '',
+        value: ''
       },
       rules: {}
     }
@@ -66,7 +67,8 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           this.visible = false
-          this.$parent.getList()
+          this.$emit('submit', this.temp)
+          this.temp = {}
           this.$message({
             type: 'success',
             message: '操作成功'

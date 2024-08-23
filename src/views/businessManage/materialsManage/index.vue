@@ -15,16 +15,18 @@
       >
         <el-table-column label="区域名称" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code1 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="区域编码" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code2 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="区域类型" prop="type3" align="center">
-          <el-tag type="success">成功</el-tag>
+          <template slot-scope="{ row }">
+            <span>{{ row.code3 }}</span>
+          </template>
         </el-table-column>
 
         <el-table-column label="操作" align="center" min-width="120">
@@ -51,7 +53,7 @@
         @uploadTableList="uploadTableList"
       />
       <!-- 新增 -->
-      <Create ref="create" />
+      <Create ref="create" @submit="create" />
       <!-- 编辑 -->
       <Edit ref="edit" />
     </div>

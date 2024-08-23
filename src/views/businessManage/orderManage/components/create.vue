@@ -47,13 +47,13 @@ export default {
       title: '新增订单',
       visible: false,
       temp: {
-        customerCode: '',
-        customerName: '',
-        dutyParagraph: '',
-        type1: '',
-        type2: '',
-        type3: '',
-        product: ''
+        customerCode1: '',
+        customerCode2: '',
+        customerCode3: '',
+        customerCode4: '',
+        customerCode5: '',
+        customerCode6: '',
+        customerCode7: ''
       },
       rules: {}
     }

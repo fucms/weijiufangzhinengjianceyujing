@@ -15,22 +15,22 @@
       >
         <el-table-column label="协议对接" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code1 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="裂痕仪设备对接" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code2 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="偏移仪设备对接" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code3 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="沉降仪设备对接" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code4 }}</span>
           </template>
         </el-table-column>
 
@@ -58,7 +58,7 @@
         @uploadTableList="uploadTableList"
       />
       <!-- 新增 -->
-      <Create ref="create" />
+      <Create ref="create" @submit="create" />
       <!-- 编辑 -->
       <Edit ref="edit" />
     </div>

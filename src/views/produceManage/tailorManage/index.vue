@@ -46,37 +46,37 @@
       >
         <el-table-column label="编号" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code1 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="房主姓名" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code2 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="行政区域" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code3 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="排查时间" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code4 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="鉴定情况" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code5 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="建造年代" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code6 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="房屋结构" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code7 }}</span>
           </template>
         </el-table-column>
 
@@ -104,7 +104,7 @@
         @uploadTableList="uploadTableList"
       />
       <!-- 新增 -->
-      <Create ref="create" />
+      <Create ref="create" @submit="create" />ubmit="create"/>
       <!-- 编辑 -->
       <Edit ref="edit" />
     </div>
@@ -158,6 +158,17 @@ export default {
         })
         this.total = res.total
         this.listLoading = false
+      })
+    },
+    create(form) {
+      this.list.push({
+        code1: form.customerCode1,
+        code2: form.customerCode2,
+        code3: form.customerCode3,
+        code4: form.customerCode4,
+        code5: form.customerCode5,
+        code6: form.customerCode6,
+        code7: form.customerCode7
       })
     },
     handleFilter() { },

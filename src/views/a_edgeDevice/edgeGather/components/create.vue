@@ -42,14 +42,14 @@ export default {
     return {
       title: '新增',
       visible: false,
-      temp: {
-        customerCode: '',
-        customerName: '',
-        dutyParagraph: '',
-        type1: '',
-        type2: '',
-        type3: '',
-        product: ''
+            temp: {
+        customerCode1: '',
+        customerCode2: '',
+        customerCode3: '',
+        customerCode4: '',
+        customerCode5: '',
+        customerCode6: '',
+        customerCode7: ''
       },
       rules: {}
     }
@@ -62,7 +62,8 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           this.visible = false
-          this.$parent.getList()
+                    this.$emit('submit', this.temp)
+          this.temp = {}
           this.$message({
             type: 'success',
             message: '操作成功'

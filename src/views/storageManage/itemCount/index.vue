@@ -5,10 +5,10 @@
                 @keyup.enter.native="handleFilter" /> -->
       <el-form :inline="true" :model="listQuery" class="demo-form-inline">
         <el-form-item label="整改单编号">
-          <el-input v-model="listQuery.filter" placeholder="请输入整改单编号" />
+          <el-input v-model="listQuery.filter1" placeholder="请输入整改单编号" />
         </el-form-item>
         <el-form-item label="审核人">
-          <el-input v-model="listQuery.filter" placeholder="请输入审核人" />
+          <el-input v-model="listQuery.filter2" placeholder="请输入审核人" />
         </el-form-item>
         <el-form-item>
           <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
@@ -49,36 +49,38 @@
       >
         <el-table-column label="整改单编号" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code1 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="隐患描述" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code2 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="整改措施" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code3 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="整改完成时间" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code4 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="整改负责人" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code5 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="审核人" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code6 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="审核状态" prop="type3" align="center">
-          <el-tag type="info">审核中</el-tag>
+          <template slot-scope="{ row }">
+            <el-tag :type="row.type1 == 1? 'success' : 'info'">{{ row.type1 == 1? '已通过' : '审核中' }}</el-tag>
+          </template>
         </el-table-column>
 
         <el-table-column label="操作" align="center" min-width="120">
@@ -105,7 +107,7 @@
         @uploadTableList="uploadTableList"
       />
       <!-- 新增 -->
-      <Create ref="create" />
+      <Create ref="create" @submit="create" />
       <!-- 编辑 -->
       <Edit ref="edit" />
     </div>
@@ -134,7 +136,9 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        filter: ''
+        filter1: '',
+        filter2: ''
+
       },
       total: 0,
       href: '/template/默认文件.xlsx',
@@ -159,6 +163,17 @@ export default {
         })
         this.total = res.total
         this.listLoading = false
+      })
+    },
+    create(form) {
+      this.list.push({
+        code1: form.customerCode1,
+        code2: form.customerCode2,
+        code3: form.customerCode3,
+        code4: form.customerCode4,
+        code5: form.customerCode5,
+        code6: form.customerCode6,
+        type1: form.value
       })
     },
     handleFilter() { },

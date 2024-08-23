@@ -4,23 +4,33 @@
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="auto" :rules="rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="协议对接" prop="customerCode">
-              <el-input v-model="temp.customerCode" />
+            <el-form-item label="楼号" prop="customerCode">
+              <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="裂痕仪设备对接" prop="customerName">
-              <el-input v-model="temp.customerName" />
+            <el-form-item label="所属小区" prop="customerName">
+              <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="偏移仪设备对接" prop="customerName">
-              <el-input v-model="temp.customerName" />
+            <el-form-item label="所属社区" prop="customerName">
+              <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="沉降仪设备对接" prop="customerName">
-              <el-input v-model="temp.customerName" />
+            <el-form-item label="社区编码" prop="customerName">
+              <el-input v-model="temp.customerCode4" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="建筑面积" prop="customerName">
+              <el-input v-model="temp.customerCode5" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="建造年代" prop="customerName">
+              <el-input v-model="temp.customerCode6" />
             </el-form-item>
           </el-col>
 
@@ -43,13 +53,12 @@ export default {
       title: '新增',
       visible: false,
       temp: {
-        customerCode: '',
-        customerName: '',
-        dutyParagraph: '',
-        type1: '',
-        type2: '',
-        type3: '',
-        product: ''
+        customerCode1: '',
+        customerCode2: '',
+        customerCode3: '',
+        customerCode4: '',
+        customerCode5: '',
+        customerCode6: ''
       },
       rules: {}
     }
@@ -62,7 +71,8 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           this.visible = false
-          this.$parent.getList()
+          this.$emit('submit', this.temp)
+          this.temp = {}
           this.$message({
             type: 'success',
             message: '操作成功'

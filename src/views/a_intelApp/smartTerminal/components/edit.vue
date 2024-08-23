@@ -5,37 +5,37 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="设备编号" prop="customerCode">
-              <el-input v-model="temp.customerCode" />
+              <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="安装小区" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="安装地点" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="设备类型" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode4" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="设备名称" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode5" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="设备阈值" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode6" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="设备品牌" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode7" />
             </el-form-item>
           </el-col>
 

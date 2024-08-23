@@ -79,7 +79,8 @@ export default {
             this.$refs['dataForm'].validate((valid) => {
                 if (valid) {
                     this.visible = false
-                    this.$parent.getList()
+                              this.$emit('submit', this.temp)
+          this.temp = {}
                     this.$message({
                         type: 'success',
                         message: '操作成功'

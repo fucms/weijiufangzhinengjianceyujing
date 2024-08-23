@@ -5,13 +5,13 @@
                 @keyup.enter.native="handleFilter" /> -->
       <el-form :inline="true" :model="listQuery" class="demo-form-inline">
         <el-form-item label="系统模块">
-          <el-input v-model="listQuery.filter" placeholder="请输入系统模块名称" />
+          <el-input v-model="listQuery.filter1" placeholder="请输入系统模块名称" />
         </el-form-item>
         <el-form-item label="操作人员">
-          <el-input v-model="listQuery.filter" placeholder="请输入操作人员名称" />
+          <el-input v-model="listQuery.filter2" placeholder="请输入操作人员名称" />
         </el-form-item>
         <el-form-item label="操作类型">
-          <el-select v-model="listQuery.filter" placeholder="请选择操作类型">
+          <el-select v-model="listQuery.filter3" placeholder="请选择操作类型">
             <el-option label="区域一" value="shanghai" />
             <el-option label="区域二" value="beijing" />
           </el-select>
@@ -26,7 +26,7 @@
           </el-col>
         </el-form-item>
         <el-form-item label="操作状态">
-          <el-select v-model="listQuery.filter" placeholder="请选择角色类型">
+          <el-select v-model="listQuery.filter4" placeholder="请选择角色类型">
             <el-option label="区域一" value="shanghai" />
             <el-option label="区域二" value="beijing" />
           </el-select>
@@ -48,45 +48,47 @@
       >
         <el-table-column label="日志ID" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code1 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="系统模块" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code2 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code3 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作人员" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code4 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="部门名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code5 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="ip地址" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code6 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作地点" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code7 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作状态" prop="type3" align="center">
-          <el-tag type="success" effect="dark">成功</el-tag>
+          <template slot-scope="{ row }">
+            <el-tag :type="row.type1 == 1? 'success' : 'danger'">{{ row.type1 == 1? '成功' : '失败' }}</el-tag>
+          </template>
         </el-table-column>
         <el-table-column label="操作时间" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code8 }}</span>
           </template>
         </el-table-column>
 
@@ -114,7 +116,7 @@
         @uploadTableList="uploadTableList"
       />
       <!-- 新增 -->
-      <Create ref="create" />
+      <Create ref="create" @submit="create" />
       <!-- 编辑 -->
       <Edit ref="edit" />
     </div>
@@ -143,7 +145,10 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        filter: '',
+        filter1: '',
+        filter2: '',
+        filter3: '',
+        filter4: '',
         data1: '',
         data2: ''
       },
@@ -171,6 +176,19 @@ export default {
         })
         this.total = res.total
         this.listLoading = false
+      })
+    },
+    create(form) {
+      this.list.push({
+        code1: form.customerCode1,
+        code2: form.customerCode2,
+        code3: form.customerCode3,
+        code4: form.customerCode4,
+        code5: form.customerCode5,
+        code6: form.customerCode6,
+        code7: form.customerCode7,
+        code8: form.customerCode8,
+        type1: form.value
       })
     },
     handleFilter() { },

@@ -46,22 +46,22 @@
       >
         <el-table-column label="任务ID" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code1 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="任务名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code2 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="开始时间" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code3 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="结束时间" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code }}</span>
+            <span>{{ row.code4 }}</span>
           </template>
         </el-table-column>
 
@@ -89,7 +89,7 @@
         @uploadTableList="uploadTableList"
       />
       <!-- 新增 -->
-      <Create ref="create" />
+      <Create ref="create" @submit="create" />
       <!-- 编辑 -->
       <Edit ref="edit" />
     </div>
@@ -143,6 +143,14 @@ export default {
         })
         this.total = res.total
         this.listLoading = false
+      })
+    },
+    create(form) {
+      this.list.push({
+        code1: form.customerCode1,
+        code2: form.customerCode2,
+        code3: form.customerCode3,
+        code4: form.customerCode4
       })
     },
     handleFilter() { },
