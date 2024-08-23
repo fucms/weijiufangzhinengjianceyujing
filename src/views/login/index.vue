@@ -64,7 +64,6 @@
       >登录</el-button>
 
     </el-form>
-    <p class="isP">Copyright © xxxxxx有限公司 版权所有</p>
 
     <el-dialog title="Or connect with" :visible.sync="showDialog">
       Can not be simulated on local, so please combine you own business
