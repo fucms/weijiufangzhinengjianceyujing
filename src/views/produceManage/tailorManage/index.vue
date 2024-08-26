@@ -104,7 +104,7 @@
         @uploadTableList="uploadTableList"
       />
       <!-- 新增 -->
-      <Create ref="create" @submit="create" />ubmit="create"/>
+      <Create ref="create" @submit="create" />
       <!-- 编辑 -->
       <Edit ref="edit" />
     </div>
