@@ -5,27 +5,30 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="序号" prop="customerCode">
-              <el-input v-model="temp.customerCode" />
+              <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="巡检人员名称" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="巡检时间" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="巡检内容" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode4" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="巡检结果" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-select v-model="temp.value" placeholder="请选择">
+                <el-option label="巡检中" value="0" />
+                <el-option label="已完成" value="1" />
+              </el-select>
             </el-form-item>
           </el-col>
 

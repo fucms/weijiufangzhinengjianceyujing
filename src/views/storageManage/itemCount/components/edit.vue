@@ -5,37 +5,40 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="整改单编号" prop="customerCode">
-              <el-input v-model="temp.customerCode" />
+              <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="隐患描述" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="整改措施" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="整改完成时间" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode4" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="整改负责人" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode5" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="审核人" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode6" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="审核状态" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-select v-model="temp.value" placeholder="请选择">
+                <el-option label="审核中" value="0" />
+                <el-option label="已通过" value="1" />
+              </el-select>
             </el-form-item>
           </el-col>
 

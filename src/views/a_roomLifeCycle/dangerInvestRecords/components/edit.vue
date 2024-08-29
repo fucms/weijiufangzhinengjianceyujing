@@ -5,32 +5,38 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="排查编号" prop="customerCode">
-              <el-input v-model="temp.customerCode" />
+              <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="排查日期" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="排查人员" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="排查地点" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode4" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="隐患类型" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode5" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="隐患等级" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-select v-model="temp.value" placeholder="请选择">
+                <el-option label="1级" value="1" />
+                <el-option label="2级" value="2" />
+                <el-option label="3级" value="3" />
+                <el-option label="4级" value="4" />
+                <el-option label="5级" value="5" />
+              </el-select>
             </el-form-item>
           </el-col>
 

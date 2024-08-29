@@ -5,7 +5,7 @@
                 @keyup.enter.native="handleFilter" /> -->
       <el-form :inline="true" :model="listQuery" class="demo-form-inline">
         <el-form-item label="楼号">
-          <el-input v-model="listQuery.filter1" placeholder="请输入楼房楼号" />
+          <el-input v-model="listQuery.filter1" placeholder="请输入楼号" />
         </el-form-item>
         <el-form-item label="所属小区">
           <el-input v-model="listQuery.filter2" placeholder="请输入所属小区" />
