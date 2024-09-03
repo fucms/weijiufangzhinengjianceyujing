@@ -79,6 +79,21 @@
             <span>{{ row.code7 }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="入库信息统计" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code8 }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="危房统计" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code9 }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="数据变化" prop="type3" align="center">
+          <template slot-scope="{ row }">
+            <span>{{ row.code10 }}</span>
+          </template>
+        </el-table-column>
 
         <el-table-column label="操作" align="center" min-width="120">
           <template slot-scope="{ row }">
@@ -117,7 +132,6 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
 export default {
   components: {
     Pagination,
@@ -149,8 +163,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -168,7 +180,10 @@ export default {
         code4: form.customerCode4,
         code5: form.customerCode5,
         code6: form.customerCode6,
-        code7: form.customerCode7
+        code7: form.customerCode7,
+        code8: form.customerCode8,
+        code9: form.customerCode9,
+        code10: form.customerCode10
       })
     },
     handleFilter() { },

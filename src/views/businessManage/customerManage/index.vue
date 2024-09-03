@@ -20,17 +20,17 @@
         </el-table-column>
         <el-table-column label="菜单名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.menuName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="请求地址" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.requestUrl }}</span>
           </template>
         </el-table-column>
         <el-table-column label="类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.type }}</span>
           </template>
         </el-table-column>
         <el-table-column label="是否显示" prop="source" align="center">
@@ -77,7 +77,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -109,8 +109,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1

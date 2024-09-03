@@ -54,22 +54,22 @@
         </el-table-column>
         <el-table-column label="事件类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.eventType }}</span>
           </template>
         </el-table-column>
         <el-table-column label="事件描述" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.eventDescription }}</span>
           </template>
         </el-table-column>
         <el-table-column label="应急人员" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.emergencyPersonnel }}</span>
           </template>
         </el-table-column>
         <el-table-column label="处置措施" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.disposalMeasures }}</span>
           </template>
         </el-table-column>
 
@@ -110,7 +110,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -143,8 +143,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -157,10 +155,10 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5
+        eventType: form.customerCode2,
+        eventDescription: form.customerCode3,
+        emergencyPersonnel: form.customerCode4,
+        disposalMeasures: form.customerCode5
       })
     },
     handleFilter() { },

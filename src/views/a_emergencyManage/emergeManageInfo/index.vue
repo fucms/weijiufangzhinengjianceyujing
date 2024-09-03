@@ -54,27 +54,27 @@
         </el-table-column>
         <el-table-column label="预案名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.planName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="预案类别" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.planCategory }}</span>
           </template>
         </el-table-column>
         <el-table-column label="适用范围" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.applicableScope }}</span>
           </template>
         </el-table-column>
         <el-table-column label="预案内容" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.planContent }}</span>
           </template>
         </el-table-column>
         <el-table-column label="审核状态" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code6 }}</span>
+            <span>{{ row.reviewStatus }}</span>
           </template>
         </el-table-column>
 
@@ -115,7 +115,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -148,8 +148,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -162,11 +160,11 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
-        code6: form.customerCode6
+        planName: form.customerCode2,
+        planCategory: form.customerCode3,
+        applicableScope: form.customerCode4,
+        planContent: form.customerCode5,
+        reviewStatus: form.customerCode6
       })
     },
     handleFilter() { },

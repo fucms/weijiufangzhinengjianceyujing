@@ -64,12 +64,12 @@
         </el-table-column>
         <el-table-column label="联系电话" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.contactPhone }}</span>
           </template>
         </el-table-column>
         <el-table-column label="邮箱" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.email }}</span>
           </template>
         </el-table-column>
 
@@ -110,7 +110,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -142,8 +142,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -158,8 +156,8 @@ export default {
         code1: form.customerCode1,
         code2: form.customerCode2,
         code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5
+        contactPhone: form.customerCode4,
+        email: form.customerCode5
       })
     },
     handleFilter() { },

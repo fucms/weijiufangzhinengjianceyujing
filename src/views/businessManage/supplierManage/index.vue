@@ -60,27 +60,27 @@
         </el-table-column>
         <el-table-column label="用户名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.userName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="登录账户" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.loginAccount }}</span>
           </template>
         </el-table-column>
         <el-table-column label="角色类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.roleType }}</span>
           </template>
         </el-table-column>
         <el-table-column label="区域名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.cityName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="电话号码" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code6 }}</span>
+            <span>{{ row.phoneNumber }}</span>
           </template>
         </el-table-column>
         <el-table-column label="用户状态" prop="type3" align="center">
@@ -90,7 +90,7 @@
         </el-table-column>
         <el-table-column label="创建时间" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code7 }}</span>
+            <span>{{ row.createTime }}</span>
           </template>
         </el-table-column>
 
@@ -132,7 +132,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -170,8 +170,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -184,12 +182,12 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
-        code6: form.customerCode6,
-        code7: form.customerCode7
+        userName: form.customerCode2,
+        loginAccount: form.customerCode3,
+        roleType: form.customerCode4,
+        cityName: form.customerCode5,
+        phoneNumber: form.customerCode6,
+        createTime: form.customerCode7
       })
     },
     handleFilter() { },

@@ -5,37 +5,52 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="编号" prop="customerCode">
-              <el-input v-model="temp.customerCode" />
+              <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="房主姓名" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="行政区域" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="排查时间" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode4" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="鉴定情况" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode5" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="建造年代" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode6" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="房屋结构" prop="customerName">
-              <el-input v-model="temp.customerName" />
+              <el-input v-model="temp.customerCode7" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="入库信息统计" prop="customerName">
+              <el-input v-model="temp.customerCode8" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="危房统计" prop="customerName">
+              <el-input v-model="temp.customerCode9" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">s
+            <el-form-item label="数据变化" prop="customerName">
+              <el-input v-model="temp.customerCode10" />
             </el-form-item>
           </el-col>
 

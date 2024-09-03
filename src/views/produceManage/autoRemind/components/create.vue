@@ -4,33 +4,38 @@
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="auto" :rules="rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="预警编号" prop="customerCode">
+            <el-form-item label="编号" prop="customerCode">
               <el-input v-model="temp.customerCode1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="预警级别" prop="customerName">
+            <el-form-item label="房主姓名" prop="customerName">
               <el-input v-model="temp.customerCode2" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="预警时间" prop="customerName">
+            <el-form-item label="行政区域" prop="customerName">
               <el-input v-model="temp.customerCode3" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="预警原因" prop="customerName">
+            <el-form-item label="排查时间" prop="customerName">
               <el-input v-model="temp.customerCode4" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="预警通知" prop="customerName">
+            <el-form-item label="鉴定情况" prop="customerName">
               <el-input v-model="temp.customerCode5" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="处置建议" prop="customerName">
+            <el-form-item label="建造年代" prop="customerName">
               <el-input v-model="temp.customerCode6" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="房屋结构" prop="customerName">
+              <el-input v-model="temp.customerCode7" />
             </el-form-item>
           </el-col>
 
@@ -58,7 +63,8 @@ export default {
         customerCode3: '',
         customerCode4: '',
         customerCode5: '',
-        customerCode6: ''
+        customerCode6: '',
+        customerCode7: ''
       },
       rules: {}
     }

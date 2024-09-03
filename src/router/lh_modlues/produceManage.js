@@ -1,7 +1,7 @@
 import Layout from '@/layout'
 
 const produceRouter = {
-  path: '/produce',
+  path: '/produceManage',
   component: Layout,
   redirect: '/basicInfo/index.vue',
   meta: {
@@ -26,6 +26,12 @@ const produceRouter = {
       component: () => import('@/views/produceManage/qualityManage/index.vue'),
       name: 'qualityManage',
       meta: { title: '隐患排查相关资料' }
+    },
+    {
+      path: '/autoRemind',
+      component: () => import('@/views/produceManage/autoRemind/index.vue'),
+      name: 'autoRemind',
+      meta: { title: '自动提醒' }
     }
 
   ]

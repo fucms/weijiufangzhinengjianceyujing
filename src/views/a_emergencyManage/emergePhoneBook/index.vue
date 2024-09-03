@@ -49,32 +49,32 @@
       >
         <el-table-column label="部门名称" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code1 }}</span>
+            <span>{{ row.departmentName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="机构名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.organizationName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="联系人姓名" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.contactPersonName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="联系电话" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.contactPhone }}</span>
           </template>
         </el-table-column>
         <el-table-column label="电子邮件" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.email }}</span>
           </template>
         </el-table-column>
         <el-table-column label="应急职责" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code6 }}</span>
+            <span>{{ row.emergencyDuties }}</span>
           </template>
         </el-table-column>
 
@@ -115,7 +115,6 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
 export default {
   components: {
     Pagination,
@@ -148,8 +147,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -161,12 +158,12 @@ export default {
     },
     create(form) {
       this.list.push({
-        code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
-        code6: form.customerCode6
+        departmentName: form.customerCode1,
+        organizationName: form.customerCode2,
+        contactPersonName: form.customerCode3,
+        contactPhone: form.customerCode4,
+        email: form.customerCode5,
+        emergencyDuties: form.customerCode6
       })
     },
     handleFilter() { },

@@ -1,219 +1,129 @@
 <template>
-  <div class="app-container">
-    <div class="filter-container">
-      <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
-                @keyup.enter.native="handleFilter" /> -->
-      <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-        <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-          <el-form-item label="房屋编号">
-            <el-input v-model="listQuery.filter1" placeholder="请输入房屋编号" />
-          </el-form-item>
-          <el-form-item label="房屋名称">
-            <el-input v-model="listQuery.filter2" placeholder="请输入房屋名称" />
-          </el-form-item>
-          <el-form-item label="房屋地址">
-            <el-input v-model="listQuery.filter3" placeholder="请输入房屋地址" />
-          </el-form-item>
-          <el-form-item label="房屋类型">
-            <el-input v-model="listQuery.filter4" placeholder="请输入房屋类型" />
-          </el-form-item>
-        </el-form>
-        <el-form-item>
-          <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-            搜索
-          </el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-plus"
-            @click="handleCreate"
-          >新增</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-bottom"
-            @click="handleImport"
-          >导入</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-top"
-            @click="handleDownload"
-          >导出</el-button>
-        </el-form-item>
-      </el-form>
+  <div class="data-summary">
+    <!-- 单栋房屋详细信息及图表 -->
+    <el-card class="box-card" style="margin-top: 20px;">
+      <div slot="header" class="clearfix">
+        <span>单栋房屋详细信息及图表</span>
+      </div>
+      <div>
+        <el-table :data="houseDetails" style="width: 100%">
+          <el-table-column prop="houseId" label="房屋编号" width="150" />
+          <el-table-column prop="location" label="位置" />
+          <el-table-column prop="status" label="当前状态" width="120" />
+        </el-table>
+        <div ref="chart" style="margin-top: 20px;height: 400px;" />
+      </div>
+    </el-card>
 
-      <el-table
-        :key="tableKey"
-        v-loading="listLoading"
-        :data="list"
-        border
-        fit
-        highlight-current-row
-        style="width: 100%"
-      >
-        <el-table-column label="房屋编号" prop="code" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code1 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="房屋名称" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="房屋地址" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="建筑面积" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="建造年份" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="房屋类型" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code6 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="房屋状态" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code7 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="隐患等级" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code8 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="整改状态" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code9 }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column label="操作" align="center" min-width="120">
-          <template slot-scope="{ row }">
-            <el-button type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
-            <el-button size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
-          </template>
-        </el-table-column>
+    <!-- 搬离数据汇总 -->
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>搬离数据汇总查询</span>
+      </div>
+      <el-table :data="evacuationData" style="width: 100%">
+        <el-table-column prop="houseId" label="房屋编号" width="150" />
+        <el-table-column prop="location" label="位置" />
+        <el-table-column prop="status" label="搬离状态" width="120" />
+        <el-table-column prop="evacuationDate" label="搬离日期" width="150" />
       </el-table>
+    </el-card>
 
-      <!-- 分页 -->
-      <pagination
-        v-show="total > 0"
-        :total="total"
-        :page.sync="listQuery.page"
-        :limit.sync="listQuery.limit"
-        @pagination="getList"
-      />
-      <!-- 导入 -->
-      <UploadDownExcel
-        ref="UploadDownExcel"
-        :href="href"
-        :down-load-text="downLoadText"
-        @uploadTableList="uploadTableList"
-      />
-      <!-- 新增 -->
-      <Create ref="create" @submit="create" />
-      <!-- 编辑 -->
-      <Edit ref="edit" />
-    </div>
+    <!-- 加固数据汇总 -->
+    <el-card class="box-card" style="margin-top: 20px;">
+      <div slot="header" class="clearfix">
+        <span>加固数据汇总查询</span>
+      </div>
+      <el-table :data="reinforcementData" style="width: 100%">
+        <el-table-column prop="houseId" label="房屋编号" width="150" />
+        <el-table-column prop="location" label="位置" />
+        <el-table-column prop="reinforcementStatus" label="加固状态" width="120" />
+        <el-table-column prop="reinforcementDate" label="加固日期" width="150" />
+      </el-table>
+    </el-card>
+
+    <!-- 拆除数据汇总 -->
+    <el-card class="box-card" style="margin-top: 20px;">
+      <div slot="header" class="clearfix">
+        <span>拆除数据汇总查询</span>
+      </div>
+      <el-table :data="demolitionData" style="width: 100%">
+        <el-table-column prop="houseId" label="房屋编号" width="150" />
+        <el-table-column prop="location" label="位置" />
+        <el-table-column prop="demolitionStatus" label="拆除状态" width="120" />
+        <el-table-column prop="demolitionDate" label="拆除日期" width="150" />
+      </el-table>
+    </el-card>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/aboutDocument'
-import Pagination from '@/components/Pagination'
-import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
-import Create from './components/create.vue'
-import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+// 引入 ECharts 组件
+import echarts from 'echarts'
+
 export default {
   components: {
-    Pagination,
-    UploadDownExcel,
-    Create,
-    Edit
   },
   data() {
     return {
-      tableKey: 0,
-      list: [],
-      listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 10,
-        filter1: '',
-        filter2: '',
-        filter3: '',
-        filter4: ''
-      },
-      total: 0,
-      href: '/template/默认文件.xlsx',
-      downLoadText: '默认文件.xlsx'
+      // 搬离数据汇总
+      evacuationData: [
+        { houseId: '001', location: '区域A', status: '已搬离', evacuationDate: '2023-10-11' },
+        { houseId: '002', location: '区域B', status: '未搬离', evacuationDate: '-' }
+        // 更多数据...
+      ],
+      // 加固数据汇总
+      reinforcementData: [
+        { houseId: '003', location: '区域C', reinforcementStatus: '已加固', reinforcementDate: '2023-10-10' },
+        { houseId: '004', location: '区域D', reinforcementStatus: '未加固', reinforcementDate: '-' }
+        // 更多数据...
+      ],
+      // 拆除数据汇总
+      demolitionData: [
+        { houseId: '005', location: '区域E', demolitionStatus: '已拆除', demolitionDate: '2023-10-12' },
+        { houseId: '006', location: '区域F', demolitionStatus: '未拆除', demolitionDate: '-' }
+        // 更多数据...
+      ],
+      // 单栋房屋详细信息
+      houseDetails: [
+        { houseId: '007', location: '区域G', status: '已搬离' },
+        { houseId: '008', location: '区域H', status: '已加固' }
+        // 更多数据...
+      ],
+      // 图表配置
+      houseChartOptions: {
+        title: { text: '房屋状态分布' },
+        tooltip: {},
+        xAxis: {
+          data: ['搬离', '加固', '拆除', '未处理']
+        },
+        yAxis: {},
+        series: [
+          {
+            name: '房屋数量',
+            type: 'bar',
+            data: [5, 10, 2, 8] // 假设数据
+          }
+        ]
+      }
     }
   },
-  computed: {},
   mounted() {
-    this.getList()
+    this.initChart()
   },
   methods: {
-    getList() {
-      this.listLoading = true
-      getList().then(res => {
-        this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
-          return {
-            ...item,
-            index: index + 1
-          }
-        })
-        this.total = res.total
-        this.listLoading = false
-      })
-    },
-    create(form) {
-      this.list.push({
-        code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
-        code6: form.customerCode6,
-        code7: form.customerCode7,
-        code8: form.customerCode8,
-        code9: form.customerCode9
-      })
-    },
-    handleFilter() { },
-    // 导入组件弹出
-    handleImport() {
-      this.$refs.UploadDownExcel.show()
-    },
-    // 导入文件
-    uploadTableList(val) { },
-    handleCreate() {
-      this.$refs.create.show()
-    },
-    handleUpdate(val) {
-      this.$refs.edit.show(val)
-    },
-    handleDelete() { },
-    handleDownload() { }
+    initChart() {
+      this.chart = echarts.init(this.$refs.chart)
+      this.chart.setOption(this.houseChartOptions)
+    }
   }
 }
 </script>
 
-<style lang="less" scoped></style>
+<style scoped>
+.data-summary {
+  padding: 20px;
+}
+.box-card {
+  margin-bottom: 20px;
+}
+</style>

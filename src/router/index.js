@@ -15,6 +15,7 @@ import patrolDefenceRouter from './lh_modlues/patrolDefence'
 import roomLifeRouter from './lh_modlues/roomLifeCycle'
 import edgeDeviceRouter from './lh_modlues/edgeDevice'
 import intelAppRouter from './lh_modlues/intelApp'
+import visualRouter from './lh_modlues/visualPlatform'
 // constantRoutes 没有权限的基页，所有角色都可以查看
 export const constantRoutes = [
   {
@@ -86,6 +87,7 @@ export const asyncRoutes = [
   patrolDefenceRouter,
   roomLifeRouter,
   edgeDeviceRouter,
+  visualRouter,
   intelAppRouter,
   businessRouter,
 

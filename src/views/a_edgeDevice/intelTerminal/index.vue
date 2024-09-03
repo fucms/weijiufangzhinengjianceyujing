@@ -51,32 +51,32 @@
         </el-table-column>
         <el-table-column label="安装小区" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.installationCommunity }}</span>
           </template>
         </el-table-column>
         <el-table-column label="安装地点" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.installationLocation }}</span>
           </template>
         </el-table-column>
         <el-table-column label="设备类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.deviceType }}</span>
           </template>
         </el-table-column>
         <el-table-column label="设备名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.deviceName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="设备阈值" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code6 }}</span>
+            <span>{{ row.deviceThreshold }}</span>
           </template>
         </el-table-column>
         <el-table-column label="设备品牌" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code7 }}</span>
+            <span>{{ row.deviceBrand }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" min-width="120">
@@ -116,7 +116,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -148,8 +148,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -162,12 +160,12 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
-        code6: form.customerCode6,
-        code7: form.customerCode7
+        installationCommunity: form.customerCode2,
+        installationLocation: form.customerCode3,
+        deviceType: form.customerCode4,
+        deviceName: form.customerCode5,
+        deviceThreshold: form.customerCode6,
+        deviceBrand: form.customerCode7
       })
     },
     handleFilter() { },

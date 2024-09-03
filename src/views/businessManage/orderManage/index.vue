@@ -53,32 +53,32 @@
         </el-table-column>
         <el-table-column label="系统模块" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.systemModule }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.operationType }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作人员" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.operator }}</span>
           </template>
         </el-table-column>
         <el-table-column label="部门名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.department }}</span>
           </template>
         </el-table-column>
         <el-table-column label="ip地址" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code6 }}</span>
+            <span>{{ row.ipAddress }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作地点" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code7 }}</span>
+            <span>{{ row.operationLocation }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作状态" prop="type3" align="center">
@@ -88,7 +88,7 @@
         </el-table-column>
         <el-table-column label="操作时间" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code8 }}</span>
+            <span>{{ row.operationTime }}</span>
           </template>
         </el-table-column>
 
@@ -129,7 +129,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -167,8 +167,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -181,13 +179,13 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
-        code6: form.customerCode6,
-        code7: form.customerCode7,
-        code8: form.customerCode8,
+        systemModule: form.customerCode2,
+        operationType: form.customerCode3,
+        operator: form.customerCode4,
+        department: form.customerCode5,
+        ipAddress: form.customerCode6,
+        operationLocation: form.customerCode7,
+        operationTime: form.customerCode8,
         type1: form.value
       })
     },

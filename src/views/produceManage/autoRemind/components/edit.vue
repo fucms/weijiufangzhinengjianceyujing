@@ -4,31 +4,38 @@
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="auto" :rules="rules">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="序号" prop="customerCode">
-              <el-input v-model="temp.customerCode1" />
+            <el-form-item label="编号" prop="customerCode">
+              <el-input v-model="temp.customerCode" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="巡检人员名称" prop="customerName">
-              <el-input v-model="temp.customerCode2" />
+            <el-form-item label="房主姓名" prop="customerName">
+              <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="巡检时间" prop="customerName">
-              <el-input v-model="temp.customerCode3" />
+            <el-form-item label="行政区域" prop="customerName">
+              <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="巡检内容" prop="customerName">
-              <el-input v-model="temp.customerCode4" />
+            <el-form-item label="排查时间" prop="customerName">
+              <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="巡检结果" prop="customerName">
-              <el-select v-model="temp.value" placeholder="请选择">
-                <el-option label="巡检中" value="0" />
-                <el-option label="已完成" value="1" />
-              </el-select>
+            <el-form-item label="鉴定情况" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="建造年代" prop="customerName">
+              <el-input v-model="temp.customerName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="房屋结构" prop="customerName">
+              <el-input v-model="temp.customerName" />
             </el-form-item>
           </el-col>
 

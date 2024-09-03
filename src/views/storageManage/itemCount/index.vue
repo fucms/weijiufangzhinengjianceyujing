@@ -54,27 +54,27 @@
         </el-table-column>
         <el-table-column label="隐患描述" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.hazardDescription }}</span>
           </template>
         </el-table-column>
         <el-table-column label="整改措施" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.rectificationMeasures }}</span>
           </template>
         </el-table-column>
         <el-table-column label="整改完成时间" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.rectificationTime }}</span>
           </template>
         </el-table-column>
         <el-table-column label="整改负责人" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.rectificationResponsible }}</span>
           </template>
         </el-table-column>
         <el-table-column label="审核人" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code6 }}</span>
+            <span>{{ row.reviewer }}</span>
           </template>
         </el-table-column>
         <el-table-column label="审核状态" prop="type3" align="center">
@@ -120,7 +120,6 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
 export default {
   components: {
     Pagination,
@@ -154,8 +153,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -168,11 +165,11 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
-        code6: form.customerCode6,
+        hazardDescription: form.customerCode2,
+        rectificationMeasures: form.customerCode3,
+        rectificationTime: form.customerCode4,
+        rectificationResponsible: form.customerCode5,
+        reviewer: form.customerCode6,
         type1: form.value
       })
     },

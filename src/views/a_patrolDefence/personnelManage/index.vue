@@ -1,184 +1,115 @@
 <template>
-  <div class="app-container">
-    <div class="filter-container">
-      <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
-                @keyup.enter.native="handleFilter" /> -->
-      <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-        <el-form-item label="序号">
-          <el-input v-model="listQuery.filter1" placeholder="请输入序号" />
-        </el-form-item>
-        <el-form-item label="巡检人员名称">
-          <el-input v-model="listQuery.filter2" placeholder="请输入巡检人员名称" />
-        </el-form-item>
-        <el-form-item>
-          <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-            搜索
-          </el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-plus"
-            @click="handleCreate"
-          >新增</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-bottom"
-            @click="handleImport"
-          >导入</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-top"
-            @click="handleDownload"
-          >导出</el-button>
-        </el-form-item>
-      </el-form>
+  <div class="personnel-management">
+    <el-row :gutter="20">
+      <!-- 巡检人员任务状态列表 -->
+      <el-col :span="24">
+        <el-card shadow="hover">
+          <h3>巡检人员任务状态</h3>
+          <el-table :data="taskStatusList" border style="width: 100%">
+            <el-table-column prop="name" label="人员姓名" width="120" />
+            <el-table-column prop="taskRange" label="任务范围" width="180" />
+            <el-table-column prop="inspectionTime" label="巡检时间" width="150" />
+            <el-table-column prop="inspectionContent" label="巡检内容" width="180" />
+            <el-table-column prop="inspectionResult" label="巡检结果" width="180" />
+            <el-table-column label="操作" width="150">
+              <template slot-scope="scope">
+                <el-button type="primary" size="small" @click="viewDetails(scope.row)">查看详情</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-card>
+      </el-col>
+    </el-row>
 
-      <el-table
-        :key="tableKey"
-        v-loading="listLoading"
-        :data="list"
-        border
-        fit
-        highlight-current-row
-        style="width: 100%"
-      >
-        <el-table-column label="序号" prop="code" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code1 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="巡检人员名称" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="巡检时间" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="巡检内容" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="巡检结果" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <el-tag :type="row.type1 == 1? 'success' : 'primary'">{{ row.type1 == 1? '已完成' : '巡检中' }}</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" align="center" min-width="120">
-          <template slot-scope="{ row }">
-            <el-button type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
-            <el-button size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+    <el-row :gutter="20" style="margin-top: 20px">
+      <!-- 前端后端人员工作紧密化 -->
+      <el-col :span="24">
+        <el-card shadow="hover">
+          <h3>前端后端人员工作紧密化</h3>
+          <el-button type="primary" @click="sendToBackend">发送至后端</el-button>
+        </el-card>
+      </el-col>
+    </el-row>
 
-      <!-- 分页 -->
-      <pagination
-        v-show="total > 0"
-        :total="total"
-        :page.sync="listQuery.page"
-        :limit.sync="listQuery.limit"
-        @pagination="getList"
-      />
-      <!-- 导入 -->
-      <UploadDownExcel
-        ref="UploadDownExcel"
-        :href="href"
-        :down-load-text="downLoadText"
-        @uploadTableList="uploadTableList"
-      />
-      <!-- 新增 -->
-      <Create ref="create" @submit="create" />
-      <!-- 编辑 -->
-      <Edit ref="edit" />
-    </div>
+    <el-row :gutter="20" style="margin-top: 20px">
+      <!-- 巡检人员活跃指标 -->
+      <el-col :span="24">
+        <el-card shadow="hover">
+          <h3>巡检人员活跃指标</h3>
+          <el-table :data="activeMetricsList" border style="width: 100%">
+            <el-table-column prop="name" label="人员姓名" width="120" />
+            <el-table-column prop="taskCount" label="任务数" width="120" />
+            <el-table-column prop="taskCompletionRate" label="任务及时完成率" width="180" />
+            <el-table-column prop="mobileUsageFrequency" label="移动端运用频度" width="180" />
+            <el-table-column prop="movementTime" label="房屋间移动时长" width="180" />
+          </el-table>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/aboutDocument'
-import Pagination from '@/components/Pagination'
-import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
-import Create from './components/create.vue'
-import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
 export default {
-  components: {
-    Pagination,
-    UploadDownExcel,
-    Create,
-    Edit
-  },
   data() {
     return {
-      tableKey: 0,
-      list: [],
-      listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 10,
-        filter1: '',
-        filter2: ''
-      },
-      total: 0,
-      href: '/template/默认文件.xlsx',
-      downLoadText: '默认文件.xlsx'
+      // 巡检人员任务状态数据
+      taskStatusList: [
+        {
+          name: '张三',
+          taskRange: '区域A',
+          inspectionTime: '2024-09-02 10:00',
+          inspectionContent: '房屋结构检查',
+          inspectionResult: '正常'
+        },
+        {
+          name: '李四',
+          taskRange: '区域B',
+          inspectionTime: '2024-09-02 11:00',
+          inspectionContent: '管道检查',
+          inspectionResult: '异常'
+        }
+        // 其他数据...
+      ],
+      // 巡检人员活跃指标数据
+      activeMetricsList: [
+        {
+          name: '张三',
+          taskCount: 10,
+          taskCompletionRate: '90%',
+          mobileUsageFrequency: '高',
+          movementTime: '5分钟'
+        },
+        {
+          name: '李四',
+          taskCount: 8,
+          taskCompletionRate: '80%',
+          mobileUsageFrequency: '中',
+          movementTime: '8分钟'
+        }
+        // 其他数据...
+      ]
     }
   },
-  computed: {},
-  mounted() {
-    this.getList()
-  },
   methods: {
-    getList() {
-      this.listLoading = true
-      getList().then(res => {
-        this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
-          return {
-            ...item,
-            index: index + 1
-          }
-        })
-        this.total = res.total
-        this.listLoading = false
-      })
+    // 查看详情方法
+    viewDetails(row) {
+      this.$message(`查看 ${row.name} 的任务详情`)
     },
-    create(form) {
-      this.list.push({
-        code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        type1: form.value
-      })
-    },
-    handleFilter() { },
-    // 导入组件弹出
-    handleImport() {
-      this.$refs.UploadDownExcel.show()
-    },
-    // 导入文件
-    uploadTableList(val) { },
-    handleCreate() {
-      this.$refs.create.show()
-    },
-    handleUpdate(val) {
-      this.$refs.edit.show(val)
-    },
-    handleDelete() { },
-    handleDownload() { }
+    // 发送至后端方法
+    sendToBackend() {
+      this.$message('信息已发送至后端进行审核')
+    }
   }
 }
 </script>
 
-<style lang="less" scoped></style>
+<style scoped>
+.personnel-management {
+  padding: 20px;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+</style>

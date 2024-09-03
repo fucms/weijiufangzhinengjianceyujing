@@ -38,6 +38,21 @@
               <el-input v-model="temp.customerCode7" />
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="入库信息统计" prop="customerName">
+              <el-input v-model="temp.customerCode8" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="危房统计" prop="customerName">
+              <el-input v-model="temp.customerCode9" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="数据变化" prop="customerName">
+              <el-input v-model="temp.customerCode10" />
+            </el-form-item>
+          </el-col>
 
         </el-row>
       </el-form>
@@ -64,7 +79,10 @@ export default {
         customerCode4: '',
         customerCode5: '',
         customerCode6: '',
-        customerCode7: ''
+        customerCode7: '',
+        customerCode8: '',
+        customerCode9: '',
+        customerCode10: ''
       },
       rules: {}
     }

@@ -54,17 +54,17 @@
         </el-table-column>
         <el-table-column label="事件名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.eventName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="事件类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.eventType }}</span>
           </template>
         </el-table-column>
         <el-table-column label="参与部门" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.participatingDepartments }}</span>
           </template>
         </el-table-column>
         <el-table-column label="执行状态" prop="type3" align="center">
@@ -109,7 +109,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -142,8 +142,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -156,9 +154,9 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
+        eventName: form.customerCode2,
+        eventType: form.customerCode3,
+        participatingDepartments: form.customerCode4,
         type1: form.value
       })
     },

@@ -72,7 +72,7 @@
 
 <script>
 import { getList } from '@/api/aboutDocument'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
 
@@ -101,8 +101,7 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
+
           return {
             ...item,
             index: index + 1

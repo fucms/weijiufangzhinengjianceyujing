@@ -15,17 +15,17 @@
       >
         <el-table-column label="安全监测分析" prop="code" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code1 }}</span>
+            <span>{{ row.safetyAnalysis }}</span>
           </template>
         </el-table-column>
         <el-table-column label="环境因素分析" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.environmentAnalysis }}</span>
           </template>
         </el-table-column>
         <el-table-column label="周边因素分析" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.surroundingFactorsAnalysis }}</span>
           </template>
         </el-table-column>
 
@@ -66,7 +66,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -98,8 +98,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -111,9 +109,9 @@ export default {
     },
     create(form) {
       this.list.push({
-        code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3
+        safetyAnalysis: form.customerCode1,
+        environmentAnalysis: form.customerCode2,
+        surroundingFactorsAnalysis: form.customerCode3
       })
     },
     handleFilter() { },

@@ -1,191 +1,99 @@
 <template>
-  <div class="app-container">
-    <div class="filter-container">
-      <!-- <el-input v-model="listQuery.filter" style="width: 200px" class="filter-item"
-                @keyup.enter.native="handleFilter" /> -->
-      <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-        <el-form-item label="任务编号">
-          <el-input v-model="listQuery.filter1" placeholder="请输入任务编号" />
-        </el-form-item>
-        <el-form-item label="任务名称">
-          <el-input v-model="listQuery.filter2" placeholder="请输入任务名称" />
-        </el-form-item>
-        <el-form-item>
-          <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-            搜索
-          </el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-plus"
-            @click="handleCreate"
-          >新增</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-bottom"
-            @click="handleImport"
-          >导入</el-button>
-          <el-button
-            class="filter-item"
-            style="margin-left: 10px"
-            type="primary"
-            icon="el-icon-top"
-            @click="handleDownload"
-          >导出</el-button>
-        </el-form-item>
-      </el-form>
-
-      <el-table
-        :key="tableKey"
-        v-loading="listLoading"
-        :data="list"
-        border
-        fit
-        highlight-current-row
-        style="width: 100%"
-      >
-        <el-table-column label="任务编号" prop="code" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code1 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="任务名称" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="任务周期" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="任务类型" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="日常任务" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="临时任务" prop="type3" align="center">
-          <template slot-scope="{ row }">
-            <span>{{ row.code6 }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column label="操作" align="center" min-width="120">
-          <template slot-scope="{ row }">
-            <el-button type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
-            <el-button size="mini" type="danger" @click="handleDelete(row)">删除</el-button>
-          </template>
+  <div class="house-inspection">
+    <el-card>
+      <el-table :data="tasks" style="width: 100%">
+        <el-table-column prop="name" label="任务名称" />
+        <el-table-column prop="type" label="任务类型" />
+        <el-table-column prop="cycle" label="任务周期">
+          <el-table-column prop="status" label="任务状态" />
+          <el-table-column prop="dueDate" label="截止日期" />
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button type="primary" size="small" @click="viewTask(scope.row)">查看</el-button>
+              <el-button type="success" size="small" @click="completeTask(scope.row)">完成</el-button>
+            </template>
+          </el-table-column>
         </el-table-column>
       </el-table>
+    </el-card>
 
-      <!-- 分页 -->
-      <pagination
-        v-show="total > 0"
-        :total="total"
-        :page.sync="listQuery.page"
-        :limit.sync="listQuery.limit"
-        @pagination="getList"
-      />
-      <!-- 导入 -->
-      <UploadDownExcel
-        ref="UploadDownExcel"
-        :href="href"
-        :down-load-text="downLoadText"
-        @uploadTableList="uploadTableList"
-      />
-      <!-- 新增 -->
-      <Create ref="create" @submit="create" />
-      <!-- 编辑 -->
-      <Edit ref="edit" />
-    </div>
+    <el-dialog :visible.sync="dialogVisible" title="任务详情">
+      <el-form :model="selectedTask">
+        <el-form-item label="任务名称">
+          <el-input v-model="selectedTask.name" disabled />
+        </el-form-item>
+        <el-form-item label="任务类型">
+          <el-input v-model="selectedTask.type" disabled />
+        </el-form-item>
+        <el-form-item label="任务周期">
+          <el-input v-model="selectedTask.cycle" disabled />
+        </el-form-item>
+        <el-form-item label="任务状态">
+          <el-input v-model="selectedTask.status" disabled />
+        </el-form-item>
+        <el-form-item label="截止日期">
+          <el-input v-model="selectedTask.dueDate" disabled />
+        </el-form-item>
+        <el-form-item label="任务描述">
+          <el-input v-model="selectedTask.description" type="textarea" disabled />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">关闭</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/aboutDocument'
-import Pagination from '@/components/Pagination'
-import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
-import Create from './components/create.vue'
-import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
 export default {
-  components: {
-    Pagination,
-    UploadDownExcel,
-    Create,
-    Edit
-  },
   data() {
     return {
-      tableKey: 0,
-      list: [],
-      listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 10,
-        filter1: '',
-        filter2: ''
-      },
-      total: 0,
-      href: '/template/默认文件.xlsx',
-      downLoadText: '默认文件.xlsx'
+      tasks: [
+        {
+          name: '房屋裂缝检测',
+          type: '日常任务',
+          cycle: '每月一次',
+          status: '未完成',
+          dueDate: '2023-10-10',
+          description: '对房屋进行裂缝检测，确保安全。'
+        },
+        {
+          name: '结构稳定性检测',
+          type: '年度任务',
+          cycle: '每年一次',
+          status: '未完成',
+          dueDate: '2023-10-10',
+          description: '检查房屋结构的整体稳定性，避免重大事故。'
+        },
+        {
+          name: '临时巡检任务',
+          type: '临时任务',
+          cycle: '一次性',
+          status: '进行中',
+          dueDate: '2023-10-10',
+          description: '突发事件导致的紧急巡检任务，需及时完成。'
+        }
+      ],
+      dialogVisible: false,
+      selectedTask: {}
     }
   },
-  computed: {},
-  mounted() {
-    this.getList()
-  },
   methods: {
-    getList() {
-      this.listLoading = true
-      getList().then(res => {
-        this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
-          return {
-            ...item,
-            index: index + 1
-          }
-        })
-        this.total = res.total
-        this.listLoading = false
-      })
+    viewTask(task) {
+      this.selectedTask = { ...task }
+      this.dialogVisible = true
     },
-    create(form) {
-      this.list.push({
-        code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
-        code6: form.customerCode6
-      })
-    },
-    handleFilter() { },
-    // 导入组件弹出
-    handleImport() {
-      this.$refs.UploadDownExcel.show()
-    },
-    // 导入文件
-    uploadTableList(val) { },
-    handleCreate() {
-      this.$refs.create.show()
-    },
-    handleUpdate(val) {
-      this.$refs.edit.show(val)
-    },
-    handleDelete() { },
-    handleDownload() { }
+    completeTask(task) {
+      task.status = '已完成'
+      this.$message.success('任务已完成')
+    }
   }
 }
 </script>
 
-<style lang="less" scoped></style>
+<style scoped>
+.house-inspection {
+  padding: 20px;
+}
+</style>

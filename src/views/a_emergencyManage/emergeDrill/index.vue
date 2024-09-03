@@ -54,22 +54,22 @@
         </el-table-column>
         <el-table-column label="演练名称" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.drillName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="演练日期" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.drillDate }}</span>
           </template>
         </el-table-column>
         <el-table-column label="参与人员" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.participants }}</span>
           </template>
         </el-table-column>
         <el-table-column label="演练内容" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.drillContent }}</span>
           </template>
         </el-table-column>
 
@@ -110,7 +110,7 @@ import Pagination from '@/components/Pagination'
 import UploadDownExcel from '@/components/UploadDownExcel/index.vue'
 import Create from './components/create.vue'
 import Edit from './components/edit.vue'
-import { levelTypeColor, customerStatusColor } from '@/filters/components/customerType'
+
 export default {
   components: {
     Pagination,
@@ -143,8 +143,6 @@ export default {
       this.listLoading = true
       getList().then(res => {
         this.list = res.items.map((item, index) => {
-          item.levelTypeColor = levelTypeColor(item.level)
-          item.customerStatusColor = customerStatusColor(item.status)
           return {
             ...item,
             index: index + 1
@@ -157,10 +155,10 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5
+        drillName: form.customerCode2,
+        drillDate: form.customerCode3,
+        participants: form.customerCode4,
+        coddrillContente: form.customerCode5
       })
     },
     handleFilter() { },

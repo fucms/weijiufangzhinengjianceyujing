@@ -54,22 +54,22 @@
         </el-table-column>
         <el-table-column label="排查日期" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code2 }}</span>
+            <span>{{ row.checkDate }}</span>
           </template>
         </el-table-column>
         <el-table-column label="排查人员" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code3 }}</span>
+            <span>{{ row.checkPerson }}</span>
           </template>
         </el-table-column>
         <el-table-column label="排查地点" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code4 }}</span>
+            <span>{{ row.checkLocation }}</span>
           </template>
         </el-table-column>
         <el-table-column label="隐患类型" prop="type3" align="center">
           <template slot-scope="{ row }">
-            <span>{{ row.code5 }}</span>
+            <span>{{ row.hazardType }}</span>
           </template>
         </el-table-column>
         <el-table-column label="隐患等级" prop="type3" align="center">
@@ -161,10 +161,10 @@ export default {
     create(form) {
       this.list.push({
         code1: form.customerCode1,
-        code2: form.customerCode2,
-        code3: form.customerCode3,
-        code4: form.customerCode4,
-        code5: form.customerCode5,
+        checkDate: form.customerCode2,
+        checkPerson: form.customerCode3,
+        checkLocation: form.customerCode4,
+        hazardType: form.customerCode5,
         hazardLevelColor: hazardLevelColor(form.value),
         hazardLevelText: hazardLevelText(form.value)
       })
